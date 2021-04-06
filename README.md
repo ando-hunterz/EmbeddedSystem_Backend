@@ -39,8 +39,8 @@ login the user
   }
   ```
 
-* **Success Response**
-  Status Code : **200**
+* **Success Response**\
+  Status Code : **200**\
   Content:
 
   ```json5
@@ -50,8 +50,8 @@ login the user
   }
   ```
 
-* **Error Response**
-  Status Code: **400**
+* **Error Response**\
+  Status Code: **400**\
   Content:
 
   ```json5
@@ -85,7 +85,7 @@ Logging User to database
   }
   ```
 
-* **Success Response**
+* **Success Response**\
   Status Code : **200**\
   Content:
 
@@ -105,7 +105,7 @@ Logging User to database
   }
   ```
 
-* **Error Response**
+* **Error Response**\
   Status Code: **400**\
   Content:
 
@@ -132,7 +132,7 @@ Get all records of users who has logged.
   None
 * **Cookie Params**
   `db_id`
-* **Success Response**
+* **Success Response**\
   Status Code : **200**\
   Content:
 
@@ -170,7 +170,7 @@ Get record of user who has logged.
   `id=[user_id]`
 * **Cookie Params**
   `db_id`
-* **Success Response**
+* **Success Response**\
   Status Code : **200**\
   Content:
 
@@ -198,7 +198,7 @@ Delete records of user who has logged.
   `id=[user_id]`
 * **Cookie Params**
   `db_id`
-* **Success Response**
+* **Success Response**\
   Status Code : **200**\
   Content:
 
