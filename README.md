@@ -86,7 +86,7 @@ Logging User to database
   ```
 
 * **Success Response**
-  Status Code : **200**
+  Status Code : **200**\
   Content:
 
   ```json5
@@ -106,7 +106,7 @@ Logging User to database
   ```
 
 * **Error Response**
-  Status Code: **400**
+  Status Code: **400**\
   Content:
 
   ```json5
@@ -133,7 +133,7 @@ Get all records of users who has logged.
 * **Cookie Params**
   `db_id`
 * **Success Response**
-  Status Code : **200**
+  Status Code : **200**\
   Content:
 
   ```json5
@@ -171,7 +171,7 @@ Get record of user who has logged.
 * **Cookie Params**
   `db_id`
 * **Success Response**
-  Status Code : **200**
+  Status Code : **200**\
   Content:
 
   ```json5
@@ -199,7 +199,7 @@ Delete records of user who has logged.
 * **Cookie Params**
   `db_id`
 * **Success Response**
-  Status Code : **200**
+  Status Code : **200**\
   Content:
 
   `Record with id 606b2e9cc9c161485cefeda8 has been deleted`
