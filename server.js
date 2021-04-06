@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   res.send("this is api endpoint");
 });
 
-//app.use(errorHandler);
+app.use(errorHandler);
 
 const server = app.listen(7070);
 

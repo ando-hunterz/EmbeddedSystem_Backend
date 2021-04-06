@@ -186,6 +186,17 @@ Get record of user who has logged.
   }
   ```
 
+  * **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+      messages: [message], 
+      fields: [error_fields] 
+  }
+  ```
+
 ### Delete Record
 
 Delete records of user who has logged.
