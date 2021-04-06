@@ -79,9 +79,9 @@ Logging User to database
 
   ```json5
   {
-      "uid": uid,
-      "temperature": temperature,
-      "status": "Ok"/"Warning"
+      uid: uid,
+      temperature: temperature,
+      status: "Ok"/"Warning"
   }
   ```
 
@@ -93,14 +93,14 @@ Logging User to database
   {
       message: "User Submitted", 
       user: {
-        "_id": id,
-        "uid": uid,
-        "temperature": temperature,
-        "status": "Ok"/"Warning",
-        "createdAt": createDate,
-        "updatedAt": updateDate,
-        "__v": 0,
-        "id": id
+        _id: id,
+        uid: uid,
+        temperature: temperature,
+        status: "Ok"/"Warning",
+        createdAt: createDate,
+        updatedAt: updateDate,
+        __v: 0,
+         id: id
     }
   }
   ```
@@ -111,7 +111,7 @@ Logging User to database
 
   ```json5
   { 
-      "messages": [message], 
-      "fields": [error_fields] 
+      messages: [message], 
+      fields: [error_fields] 
   }
   ```
