@@ -34,8 +34,8 @@ login the user
 
   ```json5
   {
-      "username": username,
-      "password": password
+      username: username,
+      password: password
   }
   ```
 
@@ -45,8 +45,8 @@ login the user
 
   ```json5
   {
-      "db_id": database_id, 
-      "jwtToken": jwtToken
+      db_id: database_id, 
+      jwtToken: jwtToken
   }
   ```
 
@@ -56,8 +56,8 @@ login the user
 
   ```json5
   { 
-      "messages": [message], 
-      "fields": [error_fields] 
+      messages: [message], 
+      fields: [error_fields] 
   }
   ```
 
@@ -115,3 +115,108 @@ Logging User to database
       fields: [error_fields] 
   }
   ```
+
+### User Endpoint
+
+User endpoint to access database
+
+### Get Records
+
+Get all records of users who has logged.
+
+* **URL**
+ `/api/user/records`
+* **Method**
+  `GET`
+* **URL Params**
+  None
+* **Cookie Params**
+  `db_id`
+* **Success Response**
+  Status Code : **200**
+  Content:
+
+  ```json5
+  [
+    {
+        _id: id,
+        uid: uid,
+        temperature: temperature,
+        status: "Ok"/"Warning",
+        createdAt: CreatedDate,
+        updatedAt: UpdatedDate,
+        __v: 0,
+        userData: {
+            _id: id,
+            uid: uid,
+            name: name,
+            id: id
+        },
+        id: id
+    },
+  ]
+  ```
+
+### -- Endpoint is WIP --
+### Get User Record
+
+Get record of user who has logged.
+
+* **URL**
+ `/api/user/records/:id`
+* **Method**
+  `GET`
+* **URL Params**
+  `id=[user_id]`
+* **Cookie Params**
+  `db_id`
+* **Success Response**
+  Status Code : **200**
+  Content:
+
+  ```json5
+  {
+    _id: id,
+    uid: uid,
+    temperature: temperature,
+    status: "Ok"/"Warning",
+    createdAt: CreatedDate,
+    updatedAt: UpdatedDate,
+    __v: 0
+  }
+  ```
+
+### Delete Record
+
+Delete records of user who has logged.
+
+* **URL**
+ `/api/user/record/:id`
+* **Method**
+  `DELETE`
+* **URL Params**
+  `id=[user_id]`
+* **Cookie Params**
+  `db_id`
+* **Success Response**
+  Status Code : **200**
+  Content:
+
+  `Record with id 606b2e9cc9c161485cefeda8 has been deleted`
+
+* **Error Response**
+  -- **WIP** --
+
+## TODO
+
+* Error Endpoint for Delete Record
+
+* User Data return message and code
+
+* Delete user JSON response
+
+* Search Endpoint
+
+* JWT Verification
+
+* Function and Route documentation
