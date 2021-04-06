@@ -7,7 +7,7 @@ module.exports = function authenticateToken(req, res, next) {
     return res
       .sendStatus(401)
       .send({ messages: ["No Jwt Token Supplied"], fields: ["jwtToken"] }); // if there isn't any token
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_TOKEN_KEY, (err, user) => {
     if (err)
       return res
         .sendStatus(403)

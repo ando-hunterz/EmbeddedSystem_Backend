@@ -220,14 +220,14 @@ Delete records of user who has logged.
 
 ## TODO
 
-* Error Endpoint for Delete Record
+* ~~Error Endpoint for Delete Record~~
 
-* User Data return message and code
+* ~~User Data return message and code~~
 
-* Delete user JSON response
+* ~~Delete user JSON response~~
 
 * Search Endpoint
 
-* JWT Verification
+* ~~JWT Verification~~
 
 * Function and Route documentation

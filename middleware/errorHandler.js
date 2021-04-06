@@ -16,10 +16,28 @@ const handleValidationError = (err, res) => {
 };
 
 const handleDocumentNotFoundError = (err, res) => {
-  let message = `Document with id ${
-    err.query._id || err.query.username
-  } not found`;
+  let message;
+  if (err.query._id || err.query.username) {
+    message = `Document with id ${
+      err.query._id || err.query.username
+    } not found`;
+  } else {
+    message = `Query not found anything`;
+  }
   res.status(400).send({ messages: message, fields: ["query"] });
+};
+
+const handleTypeError = (err, req, res) => {
+  if (req.fileValidationError) {
+    res
+      .status(400)
+      .send({ messages: req.fileValidationError, fields: ["file"] });
+  }
+};
+
+const handleCastError = (err, res) => {
+  const message = `${err.path} field is not a valid value`;
+  res.status(400).send({ message: message, fields: [`${err.path}`] });
 };
 
 //error controller function
@@ -32,6 +50,8 @@ module.exports = (err, req, res, next) => {
       return (err = handleDuplicateKeyError(err, res));
     if (err.name == "DocumentNotFoundError")
       return (err = handleDocumentNotFoundError(err, res));
+    if (err.name == "CastError") return err == handleCastError(err, res);
+    if (err.name == "TypeError") return err == handleTypeError(err, req, res);
   } catch (err) {
     res.status(500).send("An unknown error occured.");
   }

@@ -37,6 +37,7 @@
             d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
             var expires = "expires="+d.toUTCString();
             document.cookie = `db_id=${data.db_id}; Path="/""; Expires=${expires};`;
+            document.cookie = `jwtToken=${data.jwtToken};`
             window.location.href = "http://localhost:7070/user.html";
         }).catch(err => {
             console.log(err)
