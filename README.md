@@ -32,7 +32,7 @@ login the user
   `POST`
 * **Data Params**
 
-  ```json
+  ```json5
   {
       "username": username,
       "password": password
@@ -43,7 +43,7 @@ login the user
   Status Code : **200**
   Content:
 
-  ```json
+  ```json5
   {
       "db_id": database_id, 
       "jwtToken": jwtToken
@@ -54,7 +54,7 @@ login the user
   Status Code: **400**
   Content:
 
-  ```json
+  ```json5
   { 
       "messages": [message], 
       "fields": [error_fields] 
@@ -77,7 +77,7 @@ Logging User to database
   ``db_id=database_name``
 * **Data Params**
 
-  ```json
+  ```json5
   {
       "uid": uid,
       "temperature": temperature,
@@ -89,7 +89,7 @@ Logging User to database
   Status Code : **200**
   Content:
 
-  ```json
+  ```json5
   {
       message: "User Submitted", 
       user: {
@@ -109,7 +109,7 @@ Logging User to database
   Status Code: **400**
   Content:
 
-  ```json
+  ```json5
   { 
       "messages": [message], 
       "fields": [error_fields] 
