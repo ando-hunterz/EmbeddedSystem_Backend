@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Placeholder</title>
+</head>
+<body>
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+
+<form action="" method="post">
+    <label for="input">username</label> 
+    <input type="text" name="username" id="username">
+    <label for="password">password</label>
+    <input type="password" id="password">password
+    <button type="button" id="button_submit">submit</button>
+</form>
+<script>
+    const submitBtn = document.getElementById('button_submit')
+    
+    submitBtn.addEventListener("click", async (e) => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        console.log(username)
+        const data = {username: username, password: password}
+        fetch('http://localhost:7070/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data)
+            var d = new Date();
+            d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = `db_id=${data.db_id}; Path="/""; Expires=${expires};`;
+            window.location.href = "http://localhost:7070/user.html";
+        }).catch(err => {
+            console.log(err)
+        })
+    })
+</script>
+</body>
+</html>

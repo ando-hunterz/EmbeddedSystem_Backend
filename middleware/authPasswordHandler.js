@@ -13,11 +13,5 @@ module.exports = async function (res, body, user) {
     process.env.JWT_TOKEN_KEY,
     { expiresIn: "10h" }
   );
-  if (validPassword) {
-    res.status(200).json({ db_id: user.db_id, jwtToken: jwtToken });
-  } else {
-    res
-      .status(400)
-      .json({ messages: ["Password Not Valid!"], fields: ["password"] });
-  }
+  return [validPassword, jwtToken];
 };

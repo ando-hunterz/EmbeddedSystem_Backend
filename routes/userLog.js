@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { db } = require("../models/User");
 const userLogSchema = require("../models/UserLog");
+
 const router = express.Router();
 let UserLog;
 
@@ -18,7 +19,18 @@ router.post("/:db_id", async (req, res, next) => {
     });
     const savedUserLog = await userLog.save();
     db_connection.close();
-    res.status(200).json({ message: "User Submitted", user: savedUserLog });
+    if (body.status == "Ok") {
+      res.status(200).json({ message: "User Submitted", user: savedUserLog });
+    } else {
+      console.log("warning called");
+      const io = req.app.get("socketIo");
+      console.log(req.params.db_id);
+      io.to(req.params.db_id).emit("warning");
+      res.status(400).json({
+        message: "User Temp is Not OK, Call Satgas Immediately",
+        fields: ["Status"],
+      });
+    }
   } catch (error) {
     console.log(error);
     next(error);

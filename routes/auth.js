@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 const authPassword = require("../middleware/authPasswordHandler");
 
 // Register Endpoint
@@ -23,10 +22,19 @@ router.post("/register", async (req, res, next) => {
 // Login Endpoint
 router.post("/login", async (req, res, next) => {
   const body = req.body;
+  console.log(body.username);
   try {
-    const user = await User.findOne({ username: body.username });
+    const user = await User.findOne({ username: body.username }).orFail();
+    console.log(user);
     if (user) {
-      await authPassword(res, body, user);
+      const validArray = await authPassword(res, body, user);
+      if (validArray[0]) {
+        res.status(200).json({ db_id: user.db_id, jwtToken: validArray[1] });
+      } else {
+        res
+          .status(400)
+          .json({ messages: ["Password Not Valid!"], fields: ["password"] });
+      }
     }
   } catch (err) {
     console.log(err);

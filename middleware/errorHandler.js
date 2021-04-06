@@ -16,7 +16,9 @@ const handleValidationError = (err, res) => {
 };
 
 const handleDocumentNotFoundError = (err, res) => {
-  let message = `Document with id ${err.query._id} not found`;
+  let message = `Document with id ${
+    err.query._id || err.query.username
+  } not found`;
   res.status(400).send({ messages: message, fields: ["query"] });
 };
 
