@@ -31,14 +31,6 @@ app.use(errorHandler);
 
 const server = app.listen(7070);
 
-// const io = socket(server, {
-//   cors: {
-//     origin: `${process.env.CLIENT_SERVER}`,
-//     methods: ["GET", "POST"],
-//     credentials: true,
-//   },
-// });
-
 const io = socket(server);
 
 app.set("socketIo", io);

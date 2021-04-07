@@ -22,7 +22,6 @@ router.post("/:db_id", async (req, res, next) => {
     if (body.status == "Ok") {
       res.status(200).json({ message: "User Submitted", user: savedUserLog });
     } else {
-      console.log("warning called");
       const io = req.app.get("socketIo");
       console.log(req.params.db_id);
       io.to(req.params.db_id).emit("warning");

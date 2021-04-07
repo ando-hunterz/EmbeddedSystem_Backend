@@ -16,6 +16,22 @@ then use your default npm install to install the required modules
 npm install
 ```
 
+after installing check the env required by find which process use .env, then make the .env file by using command
+
+```bash
+touch .env
+vi .env
+or
+nano .env
+```
+
+use command to start the server
+
+```bash
+npm start
+```
+
+
 ## API Function
 
 ### Auth Endpoint
@@ -34,8 +50,8 @@ login the user
 
   ```json5
   {
-      username: username,
-      password: password
+    username: username,
+    password: password
   }
   ```
 
@@ -45,8 +61,8 @@ login the user
 
   ```json5
   {
-      db_id: database_id, 
-      jwtToken: jwtToken
+    db_id: database_id, 
+    jwtToken: jwtToken
   }
   ```
 
@@ -56,8 +72,8 @@ login the user
 
   ```json5
   { 
-      messages: [message], 
-      fields: [error_fields] 
+    messages: [message], 
+    fields: [error_fields] 
   }
   ```
 
@@ -79,9 +95,9 @@ Logging User to database
 
   ```json5
   {
-      uid: uid,
-      temperature: temperature,
-      status: "Ok"/"Warning"
+    uid: uid,
+    temperature: temperature,
+    status: "Ok"/"Warning"
   }
   ```
 
@@ -91,16 +107,16 @@ Logging User to database
 
   ```json5
   {
-      message: "User Submitted", 
-      user: {
-        _id: id,
-        uid: uid,
-        temperature: temperature,
-        status: "Ok"/"Warning",
-        createdAt: createDate,
-        updatedAt: updateDate,
-        __v: 0,
-         id: id
+    message: "User Submitted", 
+    user: {
+      _id: id,
+      uid: uid,
+      temperature: temperature,
+      status: "Ok"/"Warning",
+      createdAt: createDate,
+      updatedAt: updateDate,
+      __v: 0,
+      id: id
     }
   }
   ```
@@ -111,8 +127,8 @@ Logging User to database
 
   ```json5
   { 
-      messages: [message], 
-      fields: [error_fields] 
+    messages: [message], 
+    fields: [error_fields] 
   }
   ```
 
@@ -139,25 +155,22 @@ Get all records of users who has logged.
   ```json5
   [
     {
-        _id: id,
-        uid: uid,
-        temperature: temperature,
-        status: "Ok"/"Warning",
-        createdAt: CreatedDate,
-        updatedAt: UpdatedDate,
-        __v: 0,
-        userData: {
-            _id: id,
-            uid: uid,
-            name: name,
-            id: id
-        },
-        id: id
+      _id: id,
+      uid: uid,
+      temperature: temperature,
+      status: "Ok"/"Warning",
+      createdAt: CreatedDate,
+      userData: {
+          _id: id,
+          uid: uid,
+          name: name,
+          id: id
+      },
+      id: id
     },
   ]
   ```
 
-### -- Endpoint is WIP --
 ### Get User Record
 
 Get record of user who has logged.
@@ -181,9 +194,14 @@ Get record of user who has logged.
     temperature: temperature,
     status: "Ok"/"Warning",
     createdAt: CreatedDate,
-    updatedAt: UpdatedDate,
-    __v: 0
-  }
+    userData: {
+        _id: id,
+        uid: uid,
+        name: name,
+        id: id
+        },
+    id: id
+    },
   ```
 
   * **Error Response**\
@@ -192,8 +210,73 @@ Get record of user who has logged.
 
   ```json5
   { 
-      messages: [message], 
-      fields: [error_fields] 
+    messages: [message], 
+    fields: [error_fields] 
+  }
+  ```
+
+### Update Record
+
+Update selected record of user who has logged.
+
+* **URL**
+ `/api/user/record/:id`
+* **Method**
+  `PATCH`
+* **URL Params**
+  `id=[user_id]`
+* **Data Params**
+
+  ```json5
+  {
+    uid: uid
+  }
+  ```
+
+  OR
+
+  ```json5
+  {
+    temperature: temperature
+  } 
+  ```
+
+  OR
+
+  ```json5
+  {
+    uid: uid,
+    temperature: temperature
+  }
+  ```
+
+* **Cookie Params**
+  `db_id`
+* **Success Response**\
+  Status Code : **200**\
+  Content:
+
+  ```json5
+  { 
+    _id: id,
+    uid: uid,
+    temperature: temperature,
+    status: "OK"/"Warning",
+    createdAt: CreatedDate,
+    updatedAt: UpdatedDate,
+    __v: 0,
+    id: id
+  }
+  ```
+
+* **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+    messages: [message], 
+    fields: [error_fields] 
   }
   ```
 
@@ -213,10 +296,206 @@ Delete records of user who has logged.
   Status Code : **200**\
   Content:
 
-  `Record with id 606b2e9cc9c161485cefeda8 has been deleted`
+  ```json5
+  {
+    message: "Record with id user_id has been deleted"
+  }
+  ```
 
-* **Error Response**
-  -- **WIP** --
+* **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+    messages: [message], 
+    fields: [error_fields] 
+  }
+  ```
+
+### UserData Endpoint
+
+User endpoint to access userData database collection
+
+### Get UserData
+
+Get userData which has been uploaded to database via csv file
+
+* **URL**
+ `/api/user/userData`
+* **Method**
+  `GET`
+* **Cookie Params**
+  `db_id`
+* **Success Response**\
+  Status Code : **200**\
+  Content:
+
+  ```json5
+  [
+    {
+    _id: id,
+    uid: uid,
+    name: name,
+    __v: 0,
+    createdAt: CreatedDate,
+    updatedAt: UpdatedDate,
+    id: id
+    }
+  ]
+  ```
+
+* **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+    messages: [message], 
+    fields: [error_fields] 
+  }
+  ```
+
+### Post UserData
+
+Post userData with CSV files
+
+* **URL**
+ `/api/user/userData`
+* **Method**
+  `POST`
+* **Data Params**
+  .csv file with structure as following
+  
+  |uid|name|
+  |---|---|
+  |`user_uid`|`user_name`|
+
+* **Cookie Params**
+  `db_id`
+* **Success Response**\
+  Status Code : **200**\
+  Content:
+
+  ```json5
+  [
+    {
+    _id: id,
+    uid: uid,
+    name: name,
+    __v: 0,
+    createdAt: CreatedDate,
+    updatedAt: UpdatedDate,
+    id: id
+    }
+  ]
+  ```
+
+* **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+    messages: [message], 
+    fields: [error_fields] 
+  }
+  ```
+
+### Update UserData
+
+Update userData which has been uploaded to database via csv file
+
+* **URL**
+ `/api/user/userData/:id`
+* **Method**
+  `PATCH`
+* **Cookie Params**
+  `db_id`
+* **Data params**
+  
+  ```json5
+  {
+    uid: uid;
+  }
+  ```
+
+  OR
+
+  ```json5
+  {
+    name: name;
+  }
+  ```
+  
+  OR
+
+  ```json5
+  {
+    uid: uid;
+    name: name;
+  }
+  ```
+
+* **Success Response**\
+  Status Code : **200**\
+  Content:
+
+  ```json5
+  {
+    _id: id,
+    uid: uid,
+    name: name,
+    __v: 0,
+    createdAt: CreatedDate,
+    updatedAt: UpdatedDate,
+    id: id
+  }
+  ```
+
+* **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+    messages: [message], 
+    fields: [error_fields] 
+  }
+  ```
+
+### Delete UserData
+
+Delete userData which has been uploaded to database via csv file
+
+* **URL**
+ `/api/user/userData/:id`
+* **Method**
+  `DELETE`
+* **Cookie Params**
+  `db_id`
+* **Success Response**\
+  Status Code : **200**\
+  Content:
+
+  ```json5
+  { 
+    message: `User with id ${userId} deleted`
+  }
+  ```
+
+* **Error Response**\
+  Status Code: **400**\
+  Content:
+
+  ```json5
+  { 
+    messages: [message], 
+    fields: [error_fields] 
+  }
+  ```
+
+### -- Endpoint is WIP --
 
 ## TODO
 
@@ -231,3 +510,7 @@ Delete records of user who has logged.
 * ~~JWT Verification~~
 
 * Function and Route documentation
+
+* Websocket Emit Event message
+
+* ~~POST userData Error~~
