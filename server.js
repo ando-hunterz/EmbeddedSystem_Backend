@@ -14,7 +14,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
