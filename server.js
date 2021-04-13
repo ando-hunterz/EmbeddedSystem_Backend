@@ -23,6 +23,10 @@ app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
 app.use(express.static("public"));
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join("public/index.html"));
+});
+
 app.get("/", (req, res) => {
   res.send("this is api endpoint");
 });

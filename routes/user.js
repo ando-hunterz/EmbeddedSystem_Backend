@@ -30,7 +30,7 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 // Use Cookie & JwtToken Middleware
 router.use(dbCookiesHandler);
-router.use(jwtHandler);
+//router.use(jwtHandler);
 
 // Records Routes
 
@@ -109,13 +109,8 @@ router.patch("/record/:id", async (req, res, next) => {
     const db_connection = mongoose.createConnection(db_id);
     const UserLog = db_connection.model("userLog", userLogSchema);
     let updateField = null;
-    if (body.uid) {
-      updateField = `"uid": "${body.uid}"`;
-    }
     if (body.temperature) {
-      if (updateField)
-        updateField = updateField + `,\n"temperature": "${body.temperature}"`;
-      else updateField = `"temperature": "${body.temperature}"`;
+      updateField = `"temperature": "${body.temperature}"`;
     }
     updateField = JSON.parse(`{ ${updateField} }`);
     const userUpdated = await UserLog.findOneAndUpdate(
