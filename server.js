@@ -14,7 +14,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors({ credentials: true }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
