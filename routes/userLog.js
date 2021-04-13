@@ -20,11 +20,18 @@ router.post("/:db_id", async (req, res, next) => {
     const savedUserLog = await userLog.save();
     db_connection.close();
     if (body.status == "Ok") {
+      io.to(req.params.db_id).emit("userLogged", {
+        uid: body.uid,
+        message: `user with ${body.uid} logged`,
+      });
       res.status(200).json({ message: "User Submitted", user: savedUserLog });
     } else {
       const io = req.app.get("socketIo");
       console.log(req.params.db_id);
-      io.to(req.params.db_id).emit("warning");
+      io.to(req.params.db_id).emit("warning", {
+        uid: body.uid,
+        message: `user with ${body.uid} temperature has reach limit temperature`,
+      });
       res.status(400).json({
         message: "User Temp is Not OK, Call Satgas Immediately",
         fields: ["Status"],

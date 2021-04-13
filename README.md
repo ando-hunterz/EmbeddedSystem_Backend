@@ -416,7 +416,7 @@ Update userData which has been uploaded to database via csv file
   
   ```json5
   {
-    uid: uid;
+    uid: uid
   }
   ```
 
@@ -424,7 +424,7 @@ Update userData which has been uploaded to database via csv file
 
   ```json5
   {
-    name: name;
+    name: name
   }
   ```
   
@@ -432,8 +432,8 @@ Update userData which has been uploaded to database via csv file
 
   ```json5
   {
-    uid: uid;
-    name: name;
+    uid: uid,
+    name: name
   }
   ```
 
