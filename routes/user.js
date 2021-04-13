@@ -30,7 +30,7 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 // Use Cookie & JwtToken Middleware
 router.use(dbCookiesHandler);
-//router.use(jwtHandler);
+router.use(jwtHandler);
 
 // Records Routes
 
