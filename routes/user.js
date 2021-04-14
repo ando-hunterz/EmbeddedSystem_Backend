@@ -108,6 +108,7 @@ router.patch("/record/:id", async (req, res, next) => {
     const body = req.body;
     const db_connection = mongoose.createConnection(db_id);
     const UserLog = db_connection.model("userLog", userLogSchema);
+    const userData = db_connection.model("userData", userDataSchema);
     let updateField = null;
     if (body.temperature) {
       updateField = `"temperature": "${body.temperature}"`;
@@ -120,8 +121,15 @@ router.patch("/record/:id", async (req, res, next) => {
         new: true,
       }
     ).orFail();
+    const user = await UserLog.findById(userId)
+      .select("uid temperature status _id createdAt")
+      .populate({
+        path: "userData",
+        select: "uid name",
+      })
+      .orFail();
     db_connection.close();
-    res.status(200).send(userUpdated);
+    res.status(200).send(user);
   } catch (error) {
     next(error);
   }

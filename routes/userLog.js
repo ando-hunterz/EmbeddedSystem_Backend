@@ -20,6 +20,7 @@ router.post("/:db_id", async (req, res, next) => {
     const savedUserLog = await userLog.save();
     db_connection.close();
     if (body.status == "Ok") {
+      const io = req.app.get("socketIo");
       io.to(req.params.db_id).emit("userLogged", {
         uid: body.uid,
         message: `user with ${body.uid} logged`,
