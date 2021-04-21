@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require("dotenv/config");
 require("./dbConnection");
+const path = require('path');
 
 const app = express();
 
@@ -21,17 +22,18 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join("public/index.html"));
-});
 
 app.get("/", (req, res) => {
   res.send("this is api endpoint");
 });
 
-app.use(errorHandler);
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/public/index.html'));
+});
+
+//app.use(errorHandler);
 
 const server = app.listen(7070);
 
