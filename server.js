@@ -37,7 +37,11 @@ app.get('*', (req,res) =>{
 
 const server = app.listen(7070);
 
-const io = socket(server);
+const io = socket(server, {
+  cors: {
+    origin: 'http://localhost:3000'
+  }
+});
 
 app.set("socketIo", io);
 
