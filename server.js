@@ -15,7 +15,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors({ credentials: true, origin: "https://smartsani.herokuapp.com" }));
+app.use(cors({ credentials: true, allowedHeaders: ['Content-Type', 'Authorization','Cookie'], origin: "https://smartsani.herokuapp.com" }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
