@@ -112,6 +112,8 @@ router.patch("/record/:id", async (req, res, next) => {
     let updateField = null;
     if (body.temperature) {
       updateField = `"temperature": "${body.temperature}"`;
+      if(body.temperature > 37.3) updateField = updateField +`, "status": "warning"`;
+      else updateField = updateField +`, "status": "Ok"`;
     }
     updateField = JSON.parse(`{ ${updateField} }`);
     const userUpdated = await UserLog.findOneAndUpdate(
