@@ -15,7 +15,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -37,11 +37,7 @@ app.get('*', (req,res) =>{
 
 const server = app.listen(7070);
 
-const io = socket(server, {
-  cors: {
-    origin: 'http://localhost:3000'
-  }
-});
+const io = socket(server);
 
 app.set("socketIo", io);
 
