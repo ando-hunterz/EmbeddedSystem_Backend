@@ -22,17 +22,16 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
-app.use(express.static('/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get('*', (req,res) =>{
-    res.sendFile('/public/index.html');
+    res.sendFile(path.join(__dirname+'/public/index.html'));
 });
-
-console.log(path.join('public'));
 
 //app.use(errorHandler);
 
-const server = app.listen(process.env.PORT || 5000);
+const server = app.listen(process.env.PORT ||7070);
 
 const io = socket(server);
 
