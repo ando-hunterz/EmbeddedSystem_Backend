@@ -24,11 +24,6 @@ app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get("/", (req, res) => {
-  res.send("this is api endpoint");
-});
-
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/public/index.html'));
 });
