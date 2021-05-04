@@ -15,7 +15,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors({ credentials: true, origin: "https://smartsani.herokuapp.com/" }));
+app.use(cors({ credentials: true, origin: "https://smartsani.herokuapp.com" }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -35,7 +35,7 @@ const server = app.listen(process.env.PORT ||7070);
 
 const io = socket(server, {
     cors: {
-      origin: 'https://smartsani.herokuapp.com/'
+      origin: 'https://smartsani.herokuapp.com'
     }
   });
 
