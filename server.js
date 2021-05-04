@@ -15,7 +15,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors({ credentials: true, allowedHeaders: ['Content-Type', 'Authorization','Cookie'], origin: "https://smartsani.herokuapp.com" }));
+app.use(cors({ credentials: true, origin: "https://smartsani.herokuapp.com" }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -23,8 +23,6 @@ app.use("/api/auth", authRoute);
 app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
 app.use(express.static(path.join(__dirname, 'public')));
-app.enable('trust proxy');
-app.set('trust proxy', 1)
 
 
 app.get('*', (req,res) =>{
