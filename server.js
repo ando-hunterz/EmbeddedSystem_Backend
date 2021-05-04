@@ -33,7 +33,11 @@ app.get('*', (req,res) =>{
 
 const server = app.listen(process.env.PORT ||7070);
 
-const io = socket(server);
+const io = socket(server, {
+    cors: {
+      origin: 'http://localhost'
+    }
+  });
 
 app.set("socketIo", io);
 
