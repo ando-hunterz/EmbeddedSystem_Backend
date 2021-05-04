@@ -22,10 +22,10 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/public/index.html'));
+    res.sendFile('/public/index.html');
 });
 
 //app.use(errorHandler);
