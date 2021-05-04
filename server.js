@@ -24,6 +24,7 @@ app.use("/api/userLog", userLogRoute);
 app.use("/api/user", userRoute);
 app.use(express.static(path.join(__dirname, 'public')));
 app.enable('trust proxy');
+app.set('trust proxy', 1)
 
 
 app.get('*', (req,res) =>{
