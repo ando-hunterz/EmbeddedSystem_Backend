@@ -15,7 +15,7 @@ const userLogRoute = require("./routes/userLog");
 const userRoute = require("./routes/user");
 const errorHandler = require("./middleware/errorHandler");
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: ["https://smartsani.herokuapp.com","http://smartsani.herokuapp.com","http://localhost:5000"] }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -25,23 +25,19 @@ app.use("/api/user", userRoute);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get("/", (req, res) => {
-  res.send("this is api endpoint");
-});
-
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
 //app.use(errorHandler);
 
-const server = app.listen(7070);
+const server = app.listen(process.env.PORT ||7070);
 
 const io = socket(server, {
-  cors: {
-    origin: 'http://localhost:3000'
-  }
-});
+    cors: {
+      origin: ["https://smartsani.herokuapp.com","http://smartsani.herokuapp.com","http://localhost:5000"]
+    }
+  });
 
 app.set("socketIo", io);
 
