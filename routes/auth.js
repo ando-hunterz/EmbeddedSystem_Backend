@@ -14,12 +14,12 @@ router.post("/register", async (req, res, next) => {
     const savedUser = await user.save();
     res.status(200).json(savedUser);
   } catch (error) {
-    const errorMsg = error.message.split(',')
-    const errorMsg1 = errorMsg[0].split(':')[2]
-    const errorMsg2 = errorMsg[1].split(':')[1]
+    // const errorMsg = error.message.split(',')
+    // const errorMsg1 = errorMsg[0].split(':')[2]
+    // const errorMsg2 = errorMsg[1].split(':')[1]
 
-    res.status(400).json({messages: errorMsg1 + errorMsg2})
-    res.status(400).json({messages: error.message})
+    // res.status(400).json({messages: errorMsg1 + errorMsg2})
+    // res.status(400).json({messages: error.message})
     next(error);
   }
 });
@@ -42,9 +42,9 @@ router.post("/login", async (req, res, next) => {
       }
     }
   } catch (err) {
-    res
-      .status(400)
-      .json({ messages: "User not found", fields: ["username"] });
+    // res
+    //   .status(400)
+    //   .json({ messages: "User not found", fields: ["username"] });
     console.log(err);
     next(err);
   }

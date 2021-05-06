@@ -29,7 +29,7 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/public/index.html'));
 });
 
-//app.use(errorHandler);
+app.use(errorHandler);
 
 const server = app.listen(process.env.PORT ||7070);
 
