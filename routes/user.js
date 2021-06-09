@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype !== "application/octet-stream") {
+  if (file.mimetype !== "application/octet-stream" || file.mimetype !== "application/vnd.ms-excel") {
     req.fileValidationError = "File is Not a CSV File";
     return cb(null, false);
   }
